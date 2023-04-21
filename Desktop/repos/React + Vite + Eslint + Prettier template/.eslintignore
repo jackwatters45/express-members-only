@@ -1,6 +1,0 @@
-node_modules/
-dist/
-env.d.ts
-.eslintrc.cjs
-.gitignore
-vite.config.ts
