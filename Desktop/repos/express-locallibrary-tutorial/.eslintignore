@@ -1,0 +1,4 @@
+populatedb.js
+bin*
+node_modules*
+public*
