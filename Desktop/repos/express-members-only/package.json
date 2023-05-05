@@ -1,0 +1,81 @@
+{
+	"name": "express-members-only",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"engines": {
+		"node": ">=18.16.0"
+	},
+	"scripts": {
+		"build:assets": "ts-node tools/copyAssets",
+		"build:sass": "node-sass ./src/public/styles -o dist/public/styles",
+		"build": "rimraf dist && tsc -p . & npm run build:assets",
+		"start": "node dist/app.js",
+		"scss": "node-sass --watch ./src/styles -o src/styles",
+		"dev": "nodemon src/app.ts",
+		"serverstart": "DEBUG=express-inventory-app:* & npm run dev & npm run scss",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"format": "prettier --write .",
+		"fix": "npm run format & npm run lint:fix",
+		"prepare": "husky install"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{ts,tsx,js,cjs}": [
+			"npm run fix"
+		],
+		"*.{md,html,css,json,yml}": "prettier --write"
+	},
+	"devDependencies": {
+		"@types/compression": "^1.7.2",
+		"@types/cookie-parser": "^1.4.3",
+		"@types/express": "^4.17.17",
+		"@types/http-errors": "^2.0.1",
+		"@types/morgan": "^1.9.4",
+		"@types/node": "^18.16.3",
+		"@types/node-sass": "^4.11.3",
+		"@types/shelljs": "^0.8.12",
+		"@typescript-eslint/eslint-plugin": "^5.59.1",
+		"@typescript-eslint/parser": "^5.59.1",
+		"eslint": "^8.39.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-import": "^2.27.5",
+		"eslint-plugin-jsx-a11y": "^6.7.1",
+		"eslint-plugin-prettier": "^4.2.1",
+		"husky": "^8.0.0",
+		"lint-staged": "^13.2.2",
+		"node-sass": "^8.0.0",
+		"nodemon": "^2.0.22",
+		"prettier": "^2.8.8",
+		"rimraf": "^5.0.0",
+		"sass": "^1.62.1",
+		"shelljs": "^0.8.5",
+		"ts-node": "^10.9.1",
+		"ts-node-dev": "^2.0.0",
+		"typescript": "^5.0.4"
+	},
+	"dependencies": {
+		"compression": "^1.7.4",
+		"cookie-parser": "~1.4.4",
+		"debug": "~2.6.9",
+		"dotenv": "^16.0.3",
+		"express": "~4.16.1",
+		"express-async-handler": "^1.2.0",
+		"express-rate-limit": "^6.7.0",
+		"express-validator": "^7.0.1",
+		"helmet": "^6.1.5",
+		"http-errors": "~1.6.3",
+		"luxon": "^3.3.0",
+		"mongoose": "^7.1.0",
+		"morgan": "~1.9.1",
+		"pug": "^3.0.2"
+	}
+}
