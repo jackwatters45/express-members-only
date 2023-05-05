@@ -15,9 +15,25 @@ export const getSignUp = expressAsyncHandler(async (_req, res) => {
 // @desc    Register a new user
 // @route   POST /signup
 // @access  Public
-export const postSignUp = expressAsyncHandler(async (req, res) => {
+export const postSignUp = expressAsyncHandler(async (req, res, next) => {
 	// TODO
 	const errors = validationResult(req);
+
+	bcrypt.hash("somePassword", 10, async (err, hashedPassword) => {
+		// if err, do something
+		if (err) return next(err);
+		// otherwise, store hashedPassword in DB
+		try {
+			const user = new User({
+				username: req.body.username,
+				password: hashedPassword,
+			});
+			const result = await user.save();
+			res.redirect("/");
+		} catch (err) {
+			return next(err);
+		}
+	});
 });
 
 // @desc    Get login page

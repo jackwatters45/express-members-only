@@ -1,6 +1,10 @@
 import { Schema, model, Types, Document } from "mongoose";
 
-interface IUser extends Document {
+declare module "express" {
+	type User = IUser;
+}
+
+export interface IUser extends Document {
 	firstName: string;
 	lastName: string;
 	email: string;
@@ -9,6 +13,7 @@ interface IUser extends Document {
 	membershipStatus: string;
 	messages: Types.Array<Types.ObjectId>;
 	admin?: boolean;
+	_id: Types.ObjectId;
 }
 
 const UserSchema = new Schema<IUser>({

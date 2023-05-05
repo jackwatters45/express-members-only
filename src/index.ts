@@ -8,12 +8,19 @@ import dotenv from "dotenv";
 import compression from "compression";
 import helmet from "helmet";
 import RateLimit from "express-rate-limit";
+import session from "express-session";
 import indexRouter from "./routes/index";
 import configDb from "./config/database";
+import configSession from "./middleware/session.config";
+import configPassport from "./middleware/passportConfig";
 
 dotenv.config();
 
 const app = express();
+
+// session + passport set up
+configSession(app);
+configPassport(app);
 
 //  mongoose set up
 configDb();
@@ -23,24 +30,24 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
 // app.use(compression()); // Compress all routes
-// // Add helmet to the middleware chain.
-// // Set CSP headers to allow our Bootstrap and Jquery to be served
-// app.use(
-// 	helmet.contentSecurityPolicy({
-// 		directives: {
-// 			"script-src": ["self", "code.jquery.com", "cdn.jsdelivr.net"],
-// 			"img-src": ["'self'", "https: data: blob:"],
-// 		},
-// 	}),
-// );
+// Add helmet to the middleware chain.
+// Set CSP headers to allow our Bootstrap and Jquery to be served
+app.use(
+	helmet.contentSecurityPolicy({
+		directives: {
+			"script-src": ["self", "code.jquery.com", "cdn.jsdelivr.net"],
+			"img-src": ["'self'", "https: data: blob:"],
+		},
+	}),
+);
 
-// // Set up rate limiter: maximum of twenty requests per minute
-// const limiter = RateLimit({
-// 	windowMs: 1 * 60 * 1000, // 1 minute
-// 	max: 20,
-// });
-// // Apply rate limiter to all requests
-// app.use(limiter);
+// Set up rate limiter: maximum of twenty requests per minute
+const limiter = RateLimit({
+	windowMs: 1 * 60 * 1000, // 1 minute
+	max: 20,
+});
+// Apply rate limiter to all requests
+app.use(limiter);
 
 app.use(logger("dev"));
 app.use(express.json());

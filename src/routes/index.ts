@@ -1,4 +1,16 @@
 import express from "express";
+import {
+	getJoinClub,
+	getLogin,
+	getSignUp,
+	postJoinClub,
+	postLogin,
+	postSignUp,
+} from "../controllers/userController";
+import {
+	getNewMessage,
+	postNewMessage,
+} from "../controllers/messageController";
 
 const router = express.Router();
 
@@ -6,20 +18,20 @@ router.get("/", (_req, res) => {
 	res.render("index");
 });
 
-router.get("/join", (_req, res) => {
-	res.render("join");
-});
+router.get("/signup", getSignUp);
 
-router.get("/new-message", (_req, res) => {
-	res.render("new-message");
-});
+router.post("/signup", postSignUp);
 
-router.get("/login", (_req, res) => {
-	res.render("login");
-});
+router.get("/login", getLogin);
 
-router.get("/signup", (_req, res) => {
-	res.render("signup");
-});
+router.post("/login", postLogin);
+
+router.get("/join", getJoinClub);
+
+router.post("/join", postJoinClub);
+
+router.get("/new-message", getNewMessage);
+
+router.post("/new-message", postNewMessage);
 
 export default router;

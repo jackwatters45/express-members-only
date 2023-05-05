@@ -15,15 +15,14 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center; }
-
-nav ul {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  list-style: none;
-  margin-block-start: 0;
-  margin-block-end: 0;
-  padding-inline-start: 0; }
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    list-style: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0; }
 
 a {
   text-decoration: none;
@@ -50,43 +49,38 @@ main {
   gap: 30px;
   max-width: 600px;
   margin: 0 auto; }
-
-.login form, .signUp form, .join form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%; }
-
-.login label, .signUp label, .join label {
-  display: block;
-  font-weight: bold; }
-
-.login input[type="email"],
-.login input[type="password"],
-.login input[type="text"], .signUp input[type="email"],
-.signUp input[type="password"],
-.signUp input[type="text"], .join input[type="email"],
-.join input[type="password"],
-.join input[type="text"] {
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  outline: none; }
-
-.login input[type="submit"], .signUp input[type="submit"], .join input[type="submit"] {
-  margin: 10px 0 0;
-  height: 40.5px;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
-  background-color: black; }
-
-.login a, .signUp a, .join a {
-  text-decoration: underline; }
+  .login form, .signUp form, .join form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%; }
+  .login label, .signUp label, .join label {
+    display: block;
+    font-weight: bold; }
+  .login input[type="email"],
+  .login input[type="password"],
+  .login input[type="text"], .signUp input[type="email"],
+  .signUp input[type="password"],
+  .signUp input[type="text"], .join input[type="email"],
+  .join input[type="password"],
+  .join input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none; }
+  .login input[type="submit"], .signUp input[type="submit"], .join input[type="submit"] {
+    margin: 10px 0 0;
+    height: 40.5px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    background-color: black; }
+  .login a, .signUp a, .join a {
+    text-decoration: underline; }
 
 .join h1 {
   margin-block-start: 0;
