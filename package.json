@@ -19,7 +19,6 @@
 		"fix": "npm run format & npm run lint:fix",
 		"prepare": "husky install"
 	},
-
 	"lint-staged": {
 		"*.ts": [
 			"npm run fix"

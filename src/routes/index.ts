@@ -2,11 +2,24 @@ import express from "express";
 
 const router = express.Router();
 
-/* GET home page. */
 router.get("/", (_req, res) => {
-	res.render("index", { title: "Express" });
+	res.render("index");
 });
 
-// change..
+router.get("/join", (_req, res) => {
+	res.render("join");
+});
+
+router.get("/new-message", (_req, res) => {
+	res.render("new-message");
+});
+
+router.get("/login", (_req, res) => {
+	res.render("login");
+});
+
+router.get("/signup", (_req, res) => {
+	res.render("signup");
+});
 
 export default router;

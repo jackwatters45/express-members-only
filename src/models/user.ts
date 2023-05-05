@@ -8,6 +8,7 @@ interface IUser extends Document {
 	password: string;
 	membershipStatus: string;
 	messages: Types.Array<Types.ObjectId>;
+	admin?: boolean;
 }
 
 const UserSchema = new Schema<IUser>({
@@ -18,6 +19,7 @@ const UserSchema = new Schema<IUser>({
 	password: { type: String, required: true },
 	membershipStatus: { type: String, required: true },
 	messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
+	admin: { type: Boolean, default: false },
 });
 
 UserSchema.virtual("fullName").get(function (this: IUser) {
