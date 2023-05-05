@@ -87,3 +87,7 @@ main {
 
 .login a, .signUp a, .join a {
   text-decoration: underline; }
+
+.join h1 {
+  margin-block-start: 0;
+  margin-block-end: 0; }
