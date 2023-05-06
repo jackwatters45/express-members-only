@@ -18,8 +18,9 @@ html
             li
               a(href="/login") I am a member
           else
-            li 
-              a(href="/join") Become a Member
+            if user.membershipStatus === 'user'
+              li
+                a(href="/join") Join the club
             li
               a(href="/logout") Logout
       main

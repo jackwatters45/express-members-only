@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import expressAsyncHandler from "express-async-handler";
-import { body, validationResult, check } from "express-validator";
+import { Request, Response, NextFunction, User as ExpressUser } from "express";
+import { body, validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import User from "../models/user";
+import passport from "passport";
 
 // @desc    Get sign up page
 // @route   GET /signup
@@ -15,26 +16,54 @@ export const getSignUp = expressAsyncHandler(async (_req, res) => {
 // @desc    Register a new user
 // @route   POST /signup
 // @access  Public
-export const postSignUp = expressAsyncHandler(async (req, res, next) => {
-	// TODO
-	const errors = validationResult(req);
+export const postSignUp = [
+	body("firstName").notEmpty().trim(),
+	body("lastName").notEmpty().trim(),
+	body("email").notEmpty().trim().isEmail().normalizeEmail(),
+	body("username").notEmpty().trim(),
+	body("password").notEmpty().trim(),
+	body("confirmPassword")
+		.notEmpty()
+		.trim()
+		.custom((value, { req }) => {
+			if (value !== req.body.password) {
+				throw new Error("Passwords do not match");
+			}
+			return true;
+		}),
+	expressAsyncHandler(
+		async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+			try {
+				const errors = validationResult(req);
+				if (!errors.isEmpty()) {
+					return res.status(422).json({ errors: errors.array() });
+				}
 
-	bcrypt.hash("somePassword", 10, async (err, hashedPassword) => {
-		// if err, do something
-		if (err) return next(err);
-		// otherwise, store hashedPassword in DB
-		try {
-			const user = new User({
-				username: req.body.username,
-				password: hashedPassword,
-			});
-			const result = await user.save();
-			res.redirect("/");
-		} catch (err) {
-			return next(err);
-		}
-	});
-});
+				const { firstName, lastName, email, username } = req.body;
+
+				const hashedPassword = await bcrypt.hash(req.body.password, 10);
+				const user = new User({
+					firstName,
+					lastName,
+					password: hashedPassword,
+					email,
+					username,
+					membershipStatus: "user",
+				});
+				const result = await user.save();
+				if (!result) throw new Error("Could not save user");
+
+				req.logIn(user, function (err) {
+					if (err) return next(err);
+
+					return res.redirect("/");
+				});
+			} catch (err) {
+				return next(err);
+			}
+		},
+	),
+];
 
 // @desc    Get login page
 // @route   GET /login
@@ -46,10 +75,31 @@ export const getLogin = expressAsyncHandler(async (_req, res) => {
 // @desc    Log in a user
 // @route   POST /login
 // @access  Public
-export const postLogin = expressAsyncHandler(async (req, res) => {
-	// TODO
-	const errors = validationResult(req);
-});
+export const postLogin = [
+	body("username").notEmpty().trim(),
+	body("password").notEmpty().trim(),
+	expressAsyncHandler(
+		async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+			const errors = validationResult(req);
+
+			if (!errors.isEmpty())
+				return res.status(422).json({ errors: errors.array() });
+
+			passport.authenticate("local", function (err: Error, user: ExpressUser) {
+				if (err) return next(err);
+
+				if (!user)
+					return res.status(401).json({ message: "Invalid email or password" });
+
+				req.logIn(user, function (err) {
+					if (err) return next(err);
+
+					return res.redirect("/");
+				});
+			})(req, res, next);
+		},
+	),
+];
 
 // @desc    get join club page
 // @route   GET /join
@@ -61,7 +111,29 @@ export const getJoinClub = expressAsyncHandler(async (req, res) => {
 // @desc    enter code to join the club
 // @route   POST /join
 // @access  Public
-export const postJoinClub = expressAsyncHandler(async (req, res) => {
-	// TODO
-	const errors = validationResult(req);
-});
+export const postJoinClub = [
+	body("code").notEmpty().trim().blacklist("."),
+	expressAsyncHandler(async (req: Request, res: Response): Promise<any> => {
+		const errors = validationResult(req);
+
+		if (!errors.isEmpty())
+			return res.status(422).json({ errors: errors.array() });
+
+		const { code } = req.body;
+
+		const user = req.user as ExpressUser;
+		if (code.toLowerCase() === process.env.CLUB_CODE) {
+			user.membershipStatus = "superuser";
+			await user.save();
+			return res.redirect("/");
+		}
+
+		if (code.toLowerCase() !== process.env.ADMIN_CODE) {
+			user.membershipStatus = "admin";
+			await user.save();
+			return res.redirect("/");
+		}
+
+		return res.status(401).json({ message: "Invalid code" });
+	}),
+];

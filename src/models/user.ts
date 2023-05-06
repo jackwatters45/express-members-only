@@ -11,7 +11,7 @@ export interface IUser extends Document {
 	username: string;
 	password: string;
 	membershipStatus: string;
-	messages: Types.Array<Types.ObjectId>;
+	messages?: Types.Array<Types.ObjectId>;
 	admin?: boolean;
 	_id: Types.ObjectId;
 }

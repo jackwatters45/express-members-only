@@ -14,12 +14,15 @@ html
         h1 apply for membership
         a(href="/") i am stinky and want to go home
 
-      form(action="/" method="POST")
+      form(action="/signup" method="POST")
         label(for="firstName") first name:
         input(type="text" name="firstName", required)
 
         label(for="lastName") last name:
         input(type="text" name="lastName", required)
+
+        label(for="username") username:
+        input(type="text" name="username", required)
 
         label(for="email") email:
         input(type="email" name="email", required)
