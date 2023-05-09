@@ -1,0 +1,158 @@
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif; }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 10px);
+  padding: 0 20px 10px; }
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  list-style: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0; }
+
+a {
+  text-decoration: none;
+  color: black; }
+
+a:hover {
+  opacity: 0.7; }
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.login,
+.signUp,
+.join {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 30px;
+  max-width: 600px;
+  margin: 0 auto; }
+
+.login form,
+.signUp form,
+.join form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%; }
+
+.login label,
+.signUp label,
+.join label {
+  display: block;
+  font-weight: bold; }
+
+.login input[type="email"],
+.login input[type="password"],
+.login input[type="text"],
+.signUp input[type="email"],
+.signUp input[type="password"],
+.signUp input[type="text"],
+.join input[type="email"],
+.join input[type="password"],
+.join input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none; }
+
+.login input[type="submit"],
+.signUp input[type="submit"],
+.join input[type="submit"] {
+  margin: 10px 0 0;
+  height: 40.5px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: black; }
+
+.login a,
+.signUp a,
+.join a {
+  text-decoration: underline; }
+
+.join h1 {
+  margin-block-start: 0;
+  margin-block-end: 0; }
+
+.new-message {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px; }
+
+.new-message input[type="text"] {
+  height: 40px;
+  outline: none; }
+
+.new-message input[type="submit"] {
+  margin: 10px 0 0;
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: black; }
+
+.messages {
+  height: calc(100vh - 300px);
+  overflow-y: auto;
+  margin-bottom: 1em;
+  width: 100%;
+  max-width: 600px; }
+
+.messages .message {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0; }
+
+.messages .message p {
+  margin-block-start: 0;
+  margin-block-end: 0; }
+
+.messages .message .message-info {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px; }
+
+.messages .message .message-info img:hover {
+  opacity: 0.7; }
+
+.messages .message .message-info form button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer; }

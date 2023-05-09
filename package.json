@@ -7,7 +7,7 @@
 		"node": ">=18.16.0"
 	},
 	"scripts": {
-		"build:assets": "ts-node tools/copyAssets",
+		"build:assets": "ts-node src/tools/copyAssets",
 		"build:sass": "node-sass src/public/styles -o dist/public/styles",
 		"build": "rimraf dist && tsc -p . & npm run build:assets",
 		"start": "node dist/index.js",

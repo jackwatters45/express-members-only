@@ -1,0 +1,1 @@
+{"version":3,"file":"localsConfig.js","sourceRoot":"","sources":["../../src/middleware/localsConfig.ts"],"names":[],"mappings":";;AAEA,MAAM,YAAY,GAAG,CAAC,GAAgB,EAAE,EAAE;IACzC,GAAG,CAAC,GAAG,CAAC,UAAU,GAAY,EAAE,GAAa,EAAE,IAAkB;QAChE,GAAG,CAAC,MAAM,CAAC,WAAW,GAAG,GAAG,CAAC,IAAI,CAAC;QAElC,IAAI,EAAE,CAAC;IACR,CAAC,CAAC,CAAC;AAkBJ,CAAC,CAAC;AAEF,kBAAe,YAAY,CAAC"}
