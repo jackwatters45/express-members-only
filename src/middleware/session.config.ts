@@ -7,6 +7,7 @@ const configSession = (app: Application) => {
 			secret: process.env.SESSION_SECRET as string,
 			resave: false,
 			saveUninitialized: true,
+			cookie: { maxAge: 1000 * 60 * 60 },
 		}),
 	);
 };

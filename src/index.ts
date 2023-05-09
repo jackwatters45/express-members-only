@@ -35,8 +35,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // set up other middleware
 configOtherMiddleware(app);
 
-// TODO uncomment for production
-// configProdMiddleware(app);
+// set up prod middleware
+configProdMiddleware(app);
 
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
