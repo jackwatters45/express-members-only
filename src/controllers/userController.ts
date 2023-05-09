@@ -88,7 +88,9 @@ export const postLogin = [
 				if (err) return next(err);
 
 				if (!user)
-					return res.status(401).json({ message: "Invalid email or password" });
+					return res.render("login", {
+						errors: [{ msg: "Invalid email or password" }],
+					});
 
 				req.logIn(user, function (err) {
 					if (err) return next(err);
@@ -133,6 +135,6 @@ export const postJoinClub = [
 			return res.redirect("/");
 		}
 
-		return res.status(401).json({ message: "Invalid code" });
+		return res.render("join", { errors: [{ msg: "Invalid code" }] });
 	}),
 ];
