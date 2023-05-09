@@ -129,7 +129,7 @@ export const postJoinClub = [
 			return res.redirect("/");
 		}
 
-		if (code.toLowerCase() !== process.env.ADMIN_CODE) {
+		if (code.toLowerCase() === process.env.ADMIN_CODE) {
 			user.membershipStatus = "admin";
 			await user.save();
 			return res.redirect("/");
