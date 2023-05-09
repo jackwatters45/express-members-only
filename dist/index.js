@@ -41,7 +41,7 @@ app.use((err, req, res) => {
     res.status(err.status || 500);
     res.render("error");
 });
-const port = process.env.PORT || "0.0.0.0";
+const port = process.env.PORT || "5173";
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
