@@ -2,11 +2,27 @@ extends layout
 
 block content
   if user 
-    //- TODO
-    p messages here
-    p button to join the club once logged in
-    p add create new message button
-    p By this point, anyone who comes to the site should be able to see a list of all messages, with the authors name hidden. Users should be able to sign-up and create messages, but ONLY users that are members should be able to see the author and date of each message. Finally, you should have an Admin user that is able to see everything and also has the ability to delete messages.
+    each message in messages
+      div(class="message")
+        p= message.content 
+        div(class="message-info")
+          p
+            if user.membershipStatus !== 'user'
+              | #{message.user.username} 
+            | #{message.timestamp.toDateString() === new Date().toDateString() ? message.timestamp.toLocaleTimeString() : message.timestamp.toLocaleString()}
+          if user.membershipStatus === 'admin'
+            form(action=`/delete-message/${message._id}` method="POST")
+              input(type="hidden" name="_method" value="DELETE")
+              button(type="submit")
+                img(src="https://res.cloudinary.com/drheg5d7j/image/upload/v1683588221/trash-can-outline_xvfj9p.svg" alt="trash icon" class="trash-icon" style="width: 20px; height: 20px;")
+
+    form(action="/new-message" method="POST" class="new-message")
+      textarea(name="message" maxlength="140")     
+      input(type="submit" value="create new message")
+    p add async handler
+    p scrolling once enough messages are created.
+    p forms render error messages
+    p check everything is working
   else
     h1 you are not a member
     p this website is for members only

@@ -2,7 +2,7 @@ body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif; }
+  font-family: "Roboto", sans-serif; }
 
 .container {
   display: flex;
@@ -15,14 +15,15 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center; }
-  nav ul {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    list-style: none;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    padding-inline-start: 0; }
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  list-style: none;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding-inline-start: 0; }
 
 a {
   text-decoration: none;
@@ -42,46 +43,115 @@ main {
   justify-content: center;
   align-items: center; }
 
-.login, .signUp, .join {
+.login,
+.signUp,
+.join {
   display: flex;
   flex-direction: column;
   padding: 20px;
   gap: 30px;
   max-width: 600px;
   margin: 0 auto; }
-  .login form, .signUp form, .join form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%; }
-  .login label, .signUp label, .join label {
-    display: block;
-    font-weight: bold; }
-  .login input[type="email"],
-  .login input[type="password"],
-  .login input[type="text"], .signUp input[type="email"],
-  .signUp input[type="password"],
-  .signUp input[type="text"], .join input[type="email"],
-  .join input[type="password"],
-  .join input[type="text"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none; }
-  .login input[type="submit"], .signUp input[type="submit"], .join input[type="submit"] {
-    margin: 10px 0 0;
-    height: 40.5px;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-    background-color: black; }
-  .login a, .signUp a, .join a {
-    text-decoration: underline; }
+
+.login form,
+.signUp form,
+.join form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%; }
+
+.login label,
+.signUp label,
+.join label {
+  display: block;
+  font-weight: bold; }
+
+.login input[type="email"],
+.login input[type="password"],
+.login input[type="text"],
+.signUp input[type="email"],
+.signUp input[type="password"],
+.signUp input[type="text"],
+.join input[type="email"],
+.join input[type="password"],
+.join input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none; }
+
+.login input[type="submit"],
+.signUp input[type="submit"],
+.join input[type="submit"] {
+  margin: 10px 0 0;
+  height: 40.5px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: black; }
+
+.login a,
+.signUp a,
+.join a {
+  text-decoration: underline; }
 
 .join h1 {
   margin-block-start: 0;
   margin-block-end: 0; }
+
+.new-message {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px; }
+
+.new-message textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 40px;
+  outline: none;
+  resize: none; }
+
+.new-message input[type="submit"] {
+  margin: 10px 0 0;
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  background-color: black; }
+
+.message {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
+  width: 100%;
+  max-width: 600px; }
+
+.message p {
+  margin-block-start: 0;
+  margin-block-end: 0; }
+
+.message .message-info {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px; }
+
+.message .message-info img:hover {
+  opacity: 0.7; }
+
+.message .message-info form button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer; }

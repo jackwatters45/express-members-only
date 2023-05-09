@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import expressAsyncHandler from "express-async-handler";
-import { Request, Response, NextFunction, User as ExpressUser } from "express";
+import { Request, Response, NextFunction, User as UserModel } from "express";
 import { body, validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 import User from "../models/user";
@@ -9,9 +9,9 @@ import passport from "passport";
 // @desc    Get sign up page
 // @route   GET /signup
 // @access  Public
-export const getSignUp = expressAsyncHandler(async (_req, res) => {
+export const getSignUp = (_req: Request, res: Response) => {
 	res.render("signup");
-});
+};
 
 // @desc    Register a new user
 // @route   POST /signup
@@ -68,9 +68,9 @@ export const postSignUp = [
 // @desc    Get login page
 // @route   GET /login
 // @access  Public
-export const getLogin = expressAsyncHandler(async (_req, res) => {
+export const getLogin = (_req: Request, res: Response) => {
 	res.render("login");
-});
+};
 
 // @desc    Log in a user
 // @route   POST /login
@@ -85,7 +85,7 @@ export const postLogin = [
 			if (!errors.isEmpty())
 				return res.status(422).json({ errors: errors.array() });
 
-			passport.authenticate("local", function (err: Error, user: ExpressUser) {
+			passport.authenticate("local", function (err: Error, user: UserModel) {
 				if (err) return next(err);
 
 				if (!user)
@@ -104,9 +104,9 @@ export const postLogin = [
 // @desc    get join club page
 // @route   GET /join
 // @access  Public
-export const getJoinClub = expressAsyncHandler(async (req, res) => {
+export const getJoinClub = (_req: Request, res: Response) => {
 	res.render("join");
-});
+};
 
 // @desc    enter code to join the club
 // @route   POST /join
@@ -121,7 +121,7 @@ export const postJoinClub = [
 
 		const { code } = req.body;
 
-		const user = req.user as ExpressUser;
+		const user = req.user as UserModel;
 		if (code.toLowerCase() === process.env.CLUB_CODE) {
 			user.membershipStatus = "superuser";
 			await user.save();

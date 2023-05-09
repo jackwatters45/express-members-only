@@ -1,11 +1,10 @@
 import createError from "http-errors";
-import express from "express";
+import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import indexRouter from "./routes/index";
 import signupRouter from "./routes/signUp";
 import loginRouter from "./routes/login";
 import joinRouter from "./routes/join";
-import newMessageRouter from "./routes/newMessage";
 import configDb from "./config/database";
 import configSession from "./middleware/session.config";
 import configPassport from "./middleware/passportConfig";
@@ -42,13 +41,28 @@ configOtherMiddleware(app);
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/join", joinRouter);
-app.use("/new-message", newMessageRouter);
 
 app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
 app.use((req, _res, next) => {
 	next(createError(404));
+});
+
+// error handler
+interface Error {
+	status?: number;
+	message?: string;
+}
+
+app.use((err: Error, req: Request, res: Response) => {
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get("env") === "development" ? err : {};
+
+	// render the error page
+	res.status(err.status || 500);
+	res.render("error");
 });
 
 const port = process.env.PORT || 5173;
