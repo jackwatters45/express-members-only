@@ -19,9 +19,13 @@ block content
     form(action="/new-message" method="POST" class="new-message")
       textarea(name="message" maxlength="140")     
       input(type="submit" value="create new message")
-    p add async handler
+    if errors
+      ul
+        for error in errors
+          li!= error.msg
     p scrolling once enough messages are created.
     p forms render error messages
+    p session
     p check everything is working
   else
     h1 you are not a member

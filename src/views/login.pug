@@ -24,3 +24,8 @@ html
         input(type="submit", value="log In")
 
       p want to a member? <a href="/signup">Ask Nicely</a>
+
+    if errors
+      ul
+        for error in errors
+          li!= error.msg

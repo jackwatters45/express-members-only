@@ -35,9 +35,8 @@ export const postSignUp = [
 		async (req: Request, res: Response, next: NextFunction): Promise<any> => {
 			try {
 				const errors = validationResult(req);
-				if (!errors.isEmpty()) {
-					return res.status(422).json({ errors: errors.array() });
-				}
+				if (!errors.isEmpty())
+					return res.render("signup", { errors: errors.array() });
 
 				const { firstName, lastName, email, username } = req.body;
 
@@ -83,7 +82,7 @@ export const postLogin = [
 			const errors = validationResult(req);
 
 			if (!errors.isEmpty())
-				return res.status(422).json({ errors: errors.array() });
+				return res.render("login", { errors: errors.array() });
 
 			passport.authenticate("local", function (err: Error, user: UserModel) {
 				if (err) return next(err);
@@ -117,7 +116,7 @@ export const postJoinClub = [
 		const errors = validationResult(req);
 
 		if (!errors.isEmpty())
-			return res.status(422).json({ errors: errors.array() });
+			return res.render("join", { errors: errors.array() });
 
 		const { code } = req.body;
 

@@ -18,4 +18,7 @@ html
         input(type="text", name="code", required)
 
         input(type="submit", value="become ungovernable")
-
+    if errors
+      ul
+        for error in errors
+          li!= error.msg

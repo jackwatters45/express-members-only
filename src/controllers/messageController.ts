@@ -18,7 +18,7 @@ export const postNewMessage = [
 		const errors = validationResult(req);
 
 		if (!errors.isEmpty())
-			return res.status(422).json({ errors: errors.array() });
+			return res.render("index", { errors: errors.array() });
 
 		const user = req.user as IUser;
 		const message = new Message({
