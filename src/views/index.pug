@@ -2,31 +2,27 @@ extends layout
 
 block content
   if user 
-    each message in messages
-      div(class="message")
-        p= message.content 
-        div(class="message-info")
-          p
-            if user.membershipStatus !== 'user'
-              | #{message.user.username} 
-            | #{message.timestamp.toDateString() === new Date().toDateString() ? message.timestamp.toLocaleTimeString() : message.timestamp.toLocaleString()}
-          if user.membershipStatus === 'admin'
-            form(action=`/delete-message/${message._id}` method="POST")
-              input(type="hidden" name="_method" value="DELETE")
-              button(type="submit")
-                img(src="https://res.cloudinary.com/drheg5d7j/image/upload/v1683588221/trash-can-outline_xvfj9p.svg" alt="trash icon" class="trash-icon" style="width: 20px; height: 20px;")
-
+    div(class="messages")
+      each message in messages
+        div(class="message")
+          p= message.content 
+          div(class="message-info")
+            p
+              if user.membershipStatus !== 'user'
+                | #{message.user.username} 
+              | #{message.timestamp.toDateString() === new Date().toDateString() ? message.timestamp.toLocaleTimeString() : message.timestamp.toLocaleString()}
+            if user.membershipStatus === 'admin'
+              form(action=`/delete-message/${message._id}` method="POST")
+                input(type="hidden" name="_method" value="DELETE")
+                button(type="submit")
+                  img(src="https://res.cloudinary.com/drheg5d7j/image/upload/v1683588221/trash-can-outline_xvfj9p.svg" alt="trash icon" class="trash-icon" style="width: 20px; height: 20px;")
     form(action="/new-message" method="POST" class="new-message")
-      textarea(name="message" maxlength="140")     
+      input(name="message" type="text" placeholder="Your message here..")     
       input(type="submit" value="create new message")
     if errors
       ul
         for error in errors
           li!= error.msg
-    p scrolling once enough messages are created.
-    p forms render error messages
-    p session
-    p check everything is working
   else
     h1 you are not a member
     p this website is for members only

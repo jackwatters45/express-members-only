@@ -110,13 +110,9 @@ main {
   width: 100%;
   max-width: 600px; }
 
-.new-message textarea {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+.new-message input[type="text"] {
   height: 40px;
-  outline: none;
-  resize: none; }
+  outline: none; }
 
 .new-message input[type="submit"] {
   margin: 10px 0 0;
@@ -129,27 +125,32 @@ main {
   color: white;
   background-color: black; }
 
-.message {
-  display: flex;
-  flex-direction: column;
-  margin: 1em 0;
+.messages {
+  height: calc(100vh - 300px);
+  overflow-y: auto;
+  margin-bottom: 1em;
   width: 100%;
   max-width: 600px; }
 
-.message p {
+.messages .message {
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0; }
+
+.messages .message p {
   margin-block-start: 0;
   margin-block-end: 0; }
 
-.message .message-info {
+.messages .message .message-info {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 10px; }
 
-.message .message-info img:hover {
+.messages .message .message-info img:hover {
   opacity: 0.7; }
 
-.message .message-info form button {
+.messages .message .message-info form button {
   border: none;
   background-color: transparent;
   padding: 0;
