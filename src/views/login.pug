@@ -22,10 +22,9 @@ html
         input(type="password", name="password", required)
 
         input(type="submit", value="log In")
-
+      if errors
+        ul(class="errors")
+          for error in errors
+            li!= error.msg
       p want to a member? <a href="/signup">Ask Nicely</a>
 
-    if errors
-      ul
-        for error in errors
-          li!= error.msg

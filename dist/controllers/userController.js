@@ -72,7 +72,9 @@ exports.postLogin = [
             if (err)
                 return next(err);
             if (!user)
-                return res.render("login", { errors: [{ msg: "Invalid email or password" }] });
+                return res.render("login", {
+                    errors: [{ msg: "Invalid email or password" }],
+                });
             req.logIn(user, function (err) {
                 if (err)
                     return next(err);

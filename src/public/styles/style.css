@@ -32,6 +32,12 @@ a {
 a:hover {
   opacity: 0.7; }
 
+ul {
+  list-style: none; }
+
+.errors {
+  max-width: 600px; }
+
 footer {
   display: flex;
   justify-content: center;

@@ -10,15 +10,15 @@ html
     link(rel="stylesheet" href="/styles/style.css")
   body
     div(class="join")
-      
+
       h1 enter the code for super secret membership
       a(href="/") i am stinky and want to go home
 
-      form(action="/join", method="POST")
-        input(type="text", name="code", required)
+      form(action="/join" method="POST")
+        input(type="text" name="code", required)
 
-        input(type="submit", value="become ungovernable")
-    if errors
-      ul
-        for error in errors
-          li!= error.msg
+        input(type="submit" value="become ungovernable")
+      if errors
+        ul(class="errors")
+          for error in errors
+            li!= error.msg
