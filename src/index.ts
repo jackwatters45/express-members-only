@@ -38,10 +38,6 @@ configOtherMiddleware(app);
 // set up prod middleware
 configProdMiddleware(app);
 
-app.get("/signup", (_req: Request, res: Response) => {
-	res.send("signup");
-});
-
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/join", joinRouter);
